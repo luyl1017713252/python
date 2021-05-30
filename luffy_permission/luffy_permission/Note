@@ -1,0 +1,26 @@
+QuerySet数据类型
+    特性：
+    (1)可切片： QuerySet = Entry.objects.all()[0:5]
+    (2)可迭代： for item in QuerySet:
+                    print(item)
+    (3)惰性查询： 当QuerySet被使用时才会对数据库进行查询
+    (4)缓存机制：
+                第一次查询数据集会存放到内存中，再去使用就去内存中拿
+                print()简单操作，会每次都去数据库查询
+                data_list = models.Customer.objects.all()
+                # print(data_list[0:2])
+                # print(data_list[2:4])
+                for i in data_list:
+                    print(i)
+                # data_list2 = models.Customer.objects.all()
+                models.Customer.objects.update(name='Tomtu')
+                # for i in data_list:
+                #    print(i)
+    (5)使用生成器机制
+        data_list = models.Customer.objects.all().iterator()
+        # print(type(data_list))
+        for obj in data_ist:
+            print(obj)
+        # 只能用一次
+        for obj in data_list:
+            print(obj)

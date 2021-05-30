@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        #time_in{
+            background-color: #3CA6FF;
+            color: #fff4ea;
+        }
+    </style>
+</head>
+<body>
+    <form action="http://localhost:8000/auth/" method="post">
+        用户名 <input type="text" name="user">
+        密码  <input type="password" name="pwd">
+        <input type="submit" value="登录">
+    </form>
+
+    <form action="http://localhost:8000/timer/">
+        <input id="time_in" type="submit" value="查看当前时间">
+    </form>
+</body>
+</html>

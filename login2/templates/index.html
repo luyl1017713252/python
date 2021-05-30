@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>{{ user }}  <a href="/logout/">注销</a></p>
+<ul>
+    <!--模板编程-->
+    {% for foo in sp %}
+        <li>{{ foo }}</li>
+    {% endfor %}
+</ul>
+</body>
+</html>

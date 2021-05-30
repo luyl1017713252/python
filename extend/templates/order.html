@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>订单</title>
+{% endblock %}
+
+{% block menu %}
+    <a href="">订单详情</a>
+    <a href="">订单删除</a>
+    <a href="/index/">返回</a>
+{% endblock %}
+
+{% block content %}
+    {% for order in order_list %}
+        <p>{{ order }}</p>
+    {% endfor %}
+{% endblock %}
+
+
+

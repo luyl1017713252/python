@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/static/js/jquery.js"></script>
+</head>
+<body>
+{% csrf_token %}
+用户名 <input id="user" type="text">
+密码 <input id="pwd" type="password">
+<input id="login_btn" value="提交" type="button"><span id="error"></span>
+</body>
+</html>
+<script>
+    $('#login_btn').click(function () {
+        $.ajax({
+            url: '/login/',
+            type: 'post',
+            data: {
+                user: $('#user').val(),
+                pwd: $('#pwd').val(),
+                csrfmiddlewaretoken: $('[name="csrfmiddlewaretoken"]').val()
+            },
+            success: function (data) {
+                ret = JSON.parse(data)
+                if (ret.user){
+                    location.href='/index/'
+                }else{
+                    $('#error').text(ret['error']).css('color', 'red')
+                }
+
+
+            }
+
+
+        })
+
+    })
+</script>

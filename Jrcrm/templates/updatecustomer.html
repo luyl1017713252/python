@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href='/static/bootstrap/css/bootstrap.css'>
+</head>
+<body>
+<h3>编辑用户</h3>
+<div class="container-fluid">
+    <div class="row">
+        <form method="post">
+            {% csrf_token %}
+            <div class="col-md-6 col-md-offset-3">
+                {% for field in form %}
+                    <div class="form-group">
+                        <label for="title">{{ field.label }}</label>
+                        {{ field }} <span>{{ field.errors.0 }}</span>
+                    </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-success pull-right">提交</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

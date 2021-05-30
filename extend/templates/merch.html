@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>商品</title>
+{% endblock %}
+
+{% block menu %}
+    <a href="">商品详情</a>
+    <a href="">商品删除</a>
+    <a href="/index/">返回</a>
+{% endblock %}
+
+{% block content %}
+    {% for merch in merch_list %}
+        <p>{{ merch }}</p>
+    {% endfor %}
+{% endblock %}
+

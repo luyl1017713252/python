@@ -1,0 +1,17 @@
+1 查询老男孩出版社出版过的价格大于 200 的书籍
+Book.objects.filter(pub_lish='老男孩出版社',price__gt=200)
+2 查询 2017 年 8 月出版的所有以 py 开头的书籍名称
+Book.objects.filter(pub_date_year=2017,pub_date_month=8,title__startwith='py')
+3 查询价格为 50,100 或者 150 的所有书籍名称及其出版社名称
+Book.objects.filter(price__in=[50,100,150]).values('title','pub_lish')
+4 查询价格在 100 到 200 之间的所有书籍名称及其价格
+Book.objects.filter(price__range=[100,200]).values('title','price')
+5 查询所有人民出版社出版的书籍的价格（从高到低排序，去重）
+Book.objects.filter(pub_lish='人民出版社出版').values('price').distinct().order_by('-price')
+
+表与表之间的关系
+    1、一对多
+
+    2、多对多
+
+    3、一对一

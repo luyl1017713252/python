@@ -1,0 +1,18 @@
+总结
+cookie
+    针对每一个服务器与浏览器都会保存一个key-value结构的数据
+    1、获取Response对象
+    obj = HttpResponse('ok')
+    obj = render(request, 'xxx.html')
+    obj = redirect('/xxx/')
+    2、设置cookie
+    obj.set_cookie('key', value.max_age=3600, path='')
+    3、获取cookie
+    request.COOKIES.get('xxxxx')
+
+session
+    1、设置session
+    request.session['user_name'] = user_name
+    2、获取session
+    request.session.get('user_name')
+    3、删除session

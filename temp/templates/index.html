@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <p>模板语法</p>
+    <p>{{ name }}</p>
+    <p>{{ age }}</p>
+    <p>{{ books.1 }}</p>
+    <p>{{ books.3 }}</p>
+    <p>{{ info.1 }}</p>
+    <p>{{ person_list.1.name }}</p>
+    <!--通过模板语法调用对象方法时，只能获取返回结果-->
+    <p>{{ person_list.1.run }}</p>
+    <p>{{ person_list.1.run }}</p>
+    <p>{{ now | date:"Y-m-d"}}</p>
+    <p>{{ file_size | filesizeformat }}</p>
+    <p>{{ books_list | default:'没有符合条件的书籍'}}</p>
+    <p>{{ shi | truncatechars:10}}</p>
+    <p>{{ shi | truncatewords:4}}</p>
+    <p>{{ link | safe }}</p>
+    <p>{{ tag }}</p>
+    <ul>
+        {% for book in books %}
+            <li>{{ forloop.first }}{{ forloop.counter }}{{ book }}</li>
+        {% endfor %}
+    </ul>
+{% if age > 20 %}
+    <p>生小孩</p>
+{% else %}
+    <p>好好学习</p>
+{% endif %}
+{% for person in person_list %}
+    {% if person.age > 18 %}
+        <p>{{ person.name }}去打工</p>
+    {% else %}
+        <p>好好学习</p>
+    {% endif %}
+{% endfor %}
+{% with name=person_list.1.name %}
+    {{ name }}
+{% endwith %}
+</body>
+</html>

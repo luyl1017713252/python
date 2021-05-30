@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% block style %}
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
+{% endblock %}
+{% block content %}
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <form class="form_control">
+            <section class="content-header">
+                <h1>
+                    {{ customers_label }}
+                    <small>Optional description</small>
+                </h1>
+            </section>
+        </form>
+        {#            <form method="post" class="form_control">#}
+        <form method="post">
+            {% csrf_token %}
+
+            {#            </form>#}
+
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="box">
+                            <div class="box-header">
+                                <h3 class="box-title"><a href="/add_enrollment/" class="btn btn-dropbox">添加报名记录</a></h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body box2">
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th><input type="checkbox" id="box_tion">全选</th>
+                                        <th>编号</th>
+                                        <th>姓名</th>
+                                        <th>为什么报名</th>
+                                        <th>学完想达到什么期望</th>
+                                        <th>报名日期</th>
+                                        <th>校区</th>
+                                        <th>所报班级</th>
+                                        <th>备注</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for content in enrollment_list %}
+                                        <tr>
+                                            <td><input class="checkbox_boy" type="checkbox" name="pk_list"
+                                                       value={{ content.id }}></td>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{ content.customer }}</td>
+                                            <td>{{ content.why_us }}</td>
+                                            <td>{{ content.your_expectation }}</td>
+                                            <td>{{ content.enrolled_date| date:'Y-m-d' }}</td>
+                                            <td>{{ content.school }}</td>
+                                            <td>{{ content.enrolment_class }}</td>
+                                            <td>{{ content.memo }}</td>
+                                            <td>
+                                                <a href="/updateenrollment/{{ content.pk }}{{ next }}"
+                                                   class="btn btn-warning">编辑</a>
+                                                <a href="/deleenrollment/{{ content.pk }}{{ next }}" class="btn btn-danger">删除</a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+                                <nav aria-label="Page right">
+                                    <ul class="pagination">
+                                        {{ pagination.page_html |safe }}
+                                    </ul>
+                                </nav>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </section>
+            <!-- /.content -->
+        </form>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>$('#box_tion').click(function () {
+        var status = $('#box_tion').prop("checked");
+        if (status == true) {
+            $('.checkbox_boy').prop("checked", true)
+        } else {
+            $('.checkbox_boy').prop("checked", false)
+        }
+    })</script>
+
+{% endblock %}

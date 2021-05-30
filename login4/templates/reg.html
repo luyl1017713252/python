@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
+    <script src="/static/js/jquery.js"></script>
+</head>
+<body>
+<h3>注册页面</h3>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-3">
+            <form action="" method="post">
+                {% csrf_token %}
+                {% for foo in form %}
+                    <div class="form-group">
+                        <label for="">{{ foo.label }}</label>
+                        {{ foo }}
+                        <span class="error"></span>
+                    </div>
+                {% endfor %}
+                <p><input type="button" class='btn btn-success reg_btn' value="注册"></p>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $('.reg_btn').click(function () {
+        $.ajax({
+            url: '/reg/',
+            type: 'post',
+            data: {
+                username: $('#id_username').val(),
+                password: $('#id_password').val(),
+                r_password: $('#id_r_password').val(),
+                email: $('#id_email').val(),
+                tel: $('#id_tel').val(),
+                csrfmiddlewaretoken: $('[name="csrfmiddlewaretoken"]').val()
+            },
+            success: function (data) {
+                if (data.user) {
+                    console.log('成功')
+                    location.href='/login/'
+                } else {
+                    console.log(data.err_msg)
+                    $('.error').html('')
+                    $.each(data.err_msg, function (k, v) {
+                        console.log($('#id_' + k).next().html(v[0]).css('color', 'red'))
+                    })
+                }
+            }
+        })
+    })
+
+
+</script>
+
+</body>
+</html>

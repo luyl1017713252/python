@@ -1,0 +1,23 @@
+{
+  "id": "2449860",
+  "name": "表单验证",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "14046406",
+      "name": "对",
+      "font_class": "chenggong",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "15802396",
+      "name": "错",
+      "font_class": "cuowu1",
+      "unicode": "e64b",
+      "unicode_decimal": 58955
+    }
+  ]
+}

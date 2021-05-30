@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% block style %}
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
+{% endblock %}
+{% block content %}
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <form class="form_control">
+            <section class="content-header">
+                <h1>
+                    {{ customers_label }}
+                    <small>Optional description</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+                    <li class="active">Here</li>
+                    <select class="form-control" id="" name="opt" style="display: inline-block;width: 120px">
+                        <option value="name">姓名</option>
+                        <option value="qq">QQ号码</option>
+                        <option value="phone">电话号码</option>
+                    </select>
+                    <input type="text" name="q" class="form-control" style="display: inline-block;width: 200px">
+                    <button class="btn btn-success" style="vertical-align: 0">搜索</button>
+                </ol>
+            </section>
+        </form>
+        {#            <form method="post" class="form_control">#}
+        <form method="post">
+            {% csrf_token %}
+            <select name="action" class="form-control" style="display: inline-block;width: 150px;margin-left: 12px">
+                <option value="">------------</option>
+                <option value="batch_delete">批量删除</option>
+                {% if request.path != "/mycustomers/" %}
+                <option value="batch_reveres">添加我的客户</option>
+                {% endif %}
+                {% if request.path != "/customers/list/" %}
+                <option value="batch_reveres_gh">添加至全部客户</option>
+                {% endif %}
+            </select>
+            <button class="btn-success btn" style="vertical-align: 0">GO</button>
+            {#            </form>#}
+
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="box">
+                            <div class="box-header">
+                                {% if request.path != "/mycustomers/" %}
+                                    <h3 class="box-title"><a href="/add_customer/" class="btn btn-dropbox">添加用户</a></h3>
+                                {% endif %}
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body box2">
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th><input type="checkbox" id="box_tion">全选</th>
+                                        <th>编号</th>
+                                        <th>姓名</th>
+                                        <th>性别</th>
+                                        <th>手机号</th>
+                                        <th>客户来源</th>
+                                        <th>咨询课程</th>
+                                        <th>状态</th>
+                                        <th>咨询日期</th>
+                                        <th>跟进详情</th>
+                                        <th>咨询顾问</th>
+                                        <th>所报班级</th>
+                                        <th>编辑</th>
+                                        <th>删除</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for content in customers_list %}
+                                        <tr>
+                                            <td><input class="checkbox_boy" type="checkbox" name="pk_list" value={{ content.id }}></td>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{ content.name }}</td>
+                                            <td>{{ content.get_sex_display }}</td>
+                                            <td>{{ content.phone }}</td>
+                                            <td>{{ content.get_source_display }}</td>
+                                            <td>{{ content.course }}</td>
+                                            <td>{{ content.get_status }}</td>
+                                            <td>{{ content.date| date:'Y-m-d' }}</td>
+                                            <td><a href="/consultRecord/list/?customers_id={{ content.pk }}">跟进详情</a>
+                                            </td>
+                                            <td>{{ content.consultant }}</td>
+                                            <td>{{ content.get_class_list }}</td>
+                                            <td>
+                                                <a href="/updatecustomers/{{ content.pk }}{{ next }}"><i class="fa fa-edit"></i></a>
+                                            </td>
+                                            <td>
+                                                <a href="/delecustomers/{{ content.pk }}{{ next }}"><i class="fa fa-remove"></i></a>
+                                            </td>
+
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+                                <nav aria-label="Page right">
+                                    <ul class="pagination">
+                                        {{ pagination.page_html |safe }}
+                                    </ul>
+                                </nav>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </section>
+            <!-- /.content -->
+        </form>
+    </div>
+{% endblock %}
+
+
+{% block js %}
+<script>
+
+$('#box_tion').click(function () {
+    var status = $('#box_tion').prop("checked");
+    if (status==true){
+        $('.checkbox_boy').prop("checked", true)
+    }else{
+        $('.checkbox_boy').prop("checked", false)
+    }
+})
+
+
+</script>
+
+{% endblock %}

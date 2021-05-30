@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/jquery.cookie.js.js"></script>
+</head>
+<body>
+{#{% csrf_token %}#}
+<h3>ajax演示</h3>
+<button class="but">提交Ajax</button>
+<span id="aa"></span><br/>
+<input id="num1" type="text">+<input id="num2" type="text">=<input id="num3" type="text">
+<button class="btn1" id="jisuan">计算</button>
+
+<h4>文件上传</h4>
+<form method="post" action="/file_put/" enctype="multipart/form-data">
+    用户名: <input type="text" name="user">
+    文件: <input type="file" name="file_obj">
+    <input type="submit">
+</form>
+
+
+<h4>ajax文件上传</h4>
+用户名: <input type="text" id="name">
+文件: <input type="file" id="file_obj">
+<input type="submit" id="file_btn" value="提交"><span id="show"></span>
+
+
+<script>
+    //ajax上传文件
+
+    $('.btn').click(function () {
+        // 发ajax请求
+        $.ajax({
+            url: '/handle_ajax/',
+            success: function (data) {
+                console.log(data)
+                $('#aa').text(data)
+            }
+        })
+    });
+
+    $('#file_btn').click(function () {
+        // 发Ajax请求
+        file = $('#file_obj')[0].files[0]
+        console.log(file)
+        var formdate = new FormData() //创建一个formdata的对象
+        formdate.append('file_obj', file)
+        formdate.append('name', $('#name').val())
+        console.log(file)
+        $.ajax({
+            url: '/file_put/',
+            type: 'post',
+            processData:false,
+            contentType:false,
+            data: formdate,
+            success: function (data) {
+                console.log(data)
+                if (data=='ok'){
+                    $('#show').text('上传成功')
+                }
+            }
+        })
+
+    })
+
+    $($('#jisuan').click(function () {
+        num1 = $('#num1').val()
+        num2 = $('#num2').val()
+        $.ajax({
+            url: '/cal/',
+            type: 'post',
+            contentType: 'json',
+            headers:{
+              "X-CSRFToken" : $.cookie('csrftoken')
+            },
+            data: JSON.stringify({
+                num1: num1,
+                num2: num2
+            }),
+            success: function (date) {
+                console.log(date)
+                $('#num3').val(date)
+            }
+        })
+
+    }))
+</script>
+</body>
+</html>

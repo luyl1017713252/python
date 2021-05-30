@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
+    <script src="/static/js/jquery.js"></script>
+</head>
+<body>
+<h3>登录页面</h3>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-3">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="">用户名</label>
+                    <input type="text" class="form-control" id="username">
+                </div>
+                <div class="form-group">
+                    <label for="">密码</label>
+                    <input type="password" class="form-control" id="password">
+                </div>
+                <div class="form-group">
+                    <label for="">验证码</label>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" id="validcode">
+                        </div>
+                        <div class="col-md-6">
+                            <img width="350" height="35" id="valid_img" src="/valid_img/" alt="validcode">
+                        </div>
+                    </div>
+                    <p><span class="error"></span></p>
+                </div>
+                <p><input type="button" class='btn btn-success login_btn' value="提交"></p>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $('.login_btn').click(function () {
+        $.ajax({
+            url: '/login/',
+            type: 'post',
+            data: {
+                username: $('#username').val(),
+                password: $('#password').val(),
+                validcode: $('#validcode').val(),
+                csrfmiddlewaretoken: $('[name="csrfmiddlewaretoken"]').val()
+            },
+            success: function (data) {
+                console.log(data)
+                if (data.user) {
+                    location.href = "https://www.jxuspt.com/"
+                } else {
+                    $('.error').html(data.error).css('color', 'red')
+                }
+
+            }
+        })
+    })
+    $('#valid_img').click(function () {
+        this.src += '?'
+    })
+
+</script>
+
+</body>
+</html>

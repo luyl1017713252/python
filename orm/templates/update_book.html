@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+<h1>更改</h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            {% for up_date in book_up_list %}
+            <form action="/book/update/{{ up_date.id }}" method="post">
+                {% csrf_token %}
+                    <div class="form-group">
+                        <label for="title">书名</label>
+                        <input type="text" class="form-control" id="title" placeholder="书名" name="title" value="{{ up_date.title }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="price">书籍价格</label>
+                        <input type="text" class="form-control" id="price" placeholder="价格" name="price" value="{{ up_date.price }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="pub_date">出版时间</label>
+                        <input type="date" class="form-control" id="pub_date" placeholder="出版时间" name="pub_date" value="{{ up_date.pub_date | date:'Y-m-d' }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="pub_lish">出版社</label>
+                        <input type="text" class="form-control" id="pub_lish" placeholder="出版社" name="pub_lish" value="{{ up_date.pub_lish }}">
+                    </div>
+                    <button  type="submit" class="btn btn-success pull-right">确认</button>
+            </form>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+</body>
+</html>
