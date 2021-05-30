@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <script src="/static/highcharts/highcharts.js"></script>
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <form class="form_control">
+            <section class="content-header">
+                <h1>
+                    {{ customers_label }}
+                    <small>Optional description</small>
+                </h1>
+            </section>
+        </form>
+        {#            <form method="post" class="form_control">#}
+        <form method="post">
+            {% csrf_token %}
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="box">
+                            <div class="box-header">
+                                <h3 class="box-title"><a href="?date=today" class="btn btn-dropbox">当天</a></h3>
+                                <h3 class="box-title"><a href="?date=yesterday" class="btn btn-dropbox">昨天</a></h3>
+                                <h3 class="box-title"><a href="?date=week" class="btn btn-dropbox">最近一周</a></h3>
+                                <h3 class="box-title"><a href="?date=month" class="btn btn-dropbox">最近一个月</a></h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body box2">
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th><input type="checkbox" id="box_tion">全选</th>
+                                        <th>编号</th>
+                                        <th>姓名</th>
+                                        <th>手机号</th>
+                                        <th>客户来源</th>
+                                        <th>销售</th>
+                                        <th>成单日期</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for content in customer_list %}
+                                        <tr>
+                                            <td><input class="checkbox_boy" type="checkbox" name="pk_list" value={{ content.id }}></td>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{ content.name }}</td>
+                                            <td>{{ content.phone }}</td>
+                                            <td>{{ content.course }}</td>
+                                            <td>{{ content.consultant }}</td>
+                                            <td>{{ content.deal_date|date:'Y-m-d' }}</td>
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+                                <nav aria-label="Page right">
+                                    <ul class="pagination">
+                                        {{ pagination.page_html |safe }}
+                                    </ul>
+                                </nav>
+                            </div>
+
+                            <!-- /.box-body -->
+                        </div>
+                        <div id="container" style="min-width:400px;height:400px"></div>
+                        <!-- /.box -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </section>
+            <!-- /.content -->
+        </form>
+
+    </div>
+{% endblock %}
+
+
+{% block js %}
+    <script>
+        var chart = Highcharts.chart('container', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: '订单统计'
+            },
+            subtitle: {
+                text: '数据截止 2021-05-27，来源: <a href="/">JRCRM</a>'
+            },
+            xAxis: {
+                type: 'category',
+                labels: {
+                    rotation: -45  // 设置轴标签旋转角度
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: '人数 (个数)'
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            tooltip: {
+                pointFormat: '订单统计: <b>{point.y} 人数</b>'
+            },
+            series: [{
+                name: '总数',
+                data: {{ ret|safe }},
+                dataLabels: {
+                    enabled: true,
+                    rotation: -90,
+                    color: '#FFFFFF',
+                    align: 'right',
+                    format: '{point.y}', // :.1f 为保留 1 位小数
+                    y: 10
+                }
+            }]
+        });
+        $('#box_tion').click(function () {
+            var status = $('#box_tion').prop("checked");
+            if (status == true) {
+                $('.checkbox_boy').prop("checked", true)
+            } else {
+                $('.checkbox_boy').prop("checked", false)
+            }
+        })
+    </script>
+{% endblock %}
+

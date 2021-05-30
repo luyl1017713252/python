@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <!--搜索框-->
+        <form action="">
+            <section class="content-header">
+                <h1>
+                    {% if ret %}
+                    编辑客户
+                    {% else %}
+                    添加用户
+                    {% endif %}
+                    <small>Optional description</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+                    <li class="active">Here</li>
+                </ol>
+            </section>
+        </form>
+
+        <!-- 批量处理 -->
+
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <form action="" method="post">
+                            {% csrf_token %}
+                                {% for field in form %}
+                                    <label for="">{{ field.label }}</label>
+                                    {{ field }}
+                                    <span class="error">{{ field.error.0 }}</span>
+                                {% endfor %}
+                                <input type="submit" class="btn btn-success pull-right" value="提交">
+                            </form>
+                        </div>
+                        <!-- /.box-body -->
+
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </section>
+    </div>
+{% endblock %}

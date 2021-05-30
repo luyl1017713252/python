@@ -1,0 +1,13 @@
+<!--获取到permissions_menu_list生成一个动态的标签-->
+<div class="multi-menu">
+    {% for item in permissions_menu_dict.values %}
+        <div class="item">
+            <div class="title"><i class="{{ item.icon }}"></i>{{ item.title }}</div>
+            <div class="body {{ item.class }}">
+                {% for foo in item.children %}
+                    <a href="{{ foo.url }}">{{ foo.title }}</a>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+</div>

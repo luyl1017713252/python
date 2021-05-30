@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>添加</title>
+{% endblock %}
+
+{% block h3 %}
+    <h3>添加出版社</h3>
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-6 col-md-offset-3">
+        <form action="/publish/add/" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">出版社名称</label>
+                <span id="publish_name" class="iconfont"></span>
+                <input type="text" class="form-control" id="name" placeholder="name" name="name">
+            </div>
+            <div class="form-group">
+                <label for="email">email</label>
+                <span id="publish_email" class="iconfont"></span>
+                <input type="text" class="form-control" id="email" placeholder="email" name="email">
+            </div>
+            <button type="submit" class="btn btn-success pull-right">提交</button>
+        </form>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(function () {
+            $('span').css('display', 'none')
+            $('#name').blur(function () {
+                var text = this.value
+                re_publish_name =  /^[\u4E00-\u9FA5]{2,4}出版社$/
+                if (text == '') {
+                    $('#publish_name').html('&#xe64b;不能为空').css('color', 'red')
+                } else if (text.search(re_publish_name) !== -1) {
+                    $('#publish_name').html('&#xe606;').css('color', 'blue')
+                } else {
+                    $('#publish_name').html('&#xe64b;格式错误').css('color', 'red')
+                }
+                $('#publish_name').css('display', 'inline-block')
+            })
+            $('#email').blur(function () {
+                var text = this.value
+                re_publish_email = /^[A-Za-zd0-9]+([-_.][A-Za-zd]+)*@([A-Za-zd]+[-.])+[A-Za-zd]{2,5}$/
+                if (text == '') {
+                    $('#publish_email').html('&#xe64b;不能为空').css('color', 'red')
+                } else if (text.search(re_publish_email) !== -1) {
+                    $('#publish_email').html('&#xe606;').css('color', 'blue')
+                } else {
+                    $('#publish_email').html('&#xe64b;格式错误').css('color', 'red')
+                }
+                $('#publish_email').css('display', 'inline-block')
+            })
+
+        })
+    </script>
+{% endblock %}

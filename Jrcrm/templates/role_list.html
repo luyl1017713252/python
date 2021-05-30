@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% block style %}
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
+{% endblock %}
+{% block content %}
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <form class="form_control">
+            <section class="content-header">
+                <h1>
+                    所有角色
+                    <small>Optional description</small>
+                </h1>
+            </section>
+        </form>
+        {#            <form method="post" class="form_control">#}
+        <form method="post">
+            {% csrf_token %}
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="box">
+                            <div class="box-header">
+                                {% if request.path != "/mycustomers/" %}
+                                    <h3 class="box-title"><a href="/role/add/" class="btn btn-dropbox">添加角色</a></h3>
+                                {% endif %}
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body box2">
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>编号</th>
+                                        <th>角色名</th>
+                                        <th>拥有的权限</th>
+                                        <th>编辑</th>
+                                        <th>删除</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for content in role_list %}
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{ content.title }}</td>
+                                            <td>{{ content.get_permissions_list}}</td>
+                                            <td>
+                                                <a href="/edit/roles/{{ content.pk }}{{ next }}"><i class="fa fa-edit"></i></a>
+                                            </td>
+                                            <td>
+                                                <a href="/role/dele/{{ content.pk }}"><i class="fa fa-remove"></i></a>
+                                            </td>
+
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+                                <nav aria-label="Page right">
+                                    <ul class="pagination">
+                                        {{ pagination.page_html |safe }}
+                                    </ul>
+                                </nav>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </section>
+            <!-- /.content -->
+        </form>
+    </div>
+{% endblock %}
+
+
+{% block js %}
+<script>
+
+$('#box_tion').click(function () {
+    var status = $('#box_tion').prop("checked");
+    if (status==true){
+        $('.checkbox_boy').prop("checked", true)
+    }else{
+        $('.checkbox_boy').prop("checked", false)
+    }
+})
+
+
+</script>
+
+{% endblock %}

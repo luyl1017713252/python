@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% csrf_token %}
+<div class="c1">首页 {{ name }}</div>
+<button class="b1">Tomtu</button>
+
+<script src="../static/js/jquery-3.3.1.min.js"></script>
+<script>
+    $('.c1').click(function () {
+        $(this).css('color', 'red')
+    })
+    $('.b1').click(function () {
+        $.ajax({
+            url: '/index/',
+            type: 'post',
+            data:{
+                name:'{{ name }}',
+                csrfmiddlewaretoken: $('[name="csrfmiddlewaretoken"]').val()
+            },
+            success: function (date) {
+                console.log(date)
+            }
+
+        })
+    })
+
+
+</script>
+</body>
+</html>

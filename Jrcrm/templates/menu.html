@@ -1,0 +1,16 @@
+{% for item in permissions_menu_dict.values %}
+    <li class="treeview {{ item.selected }}">
+        <a href="#"><i class="fa fa-link"></i> <span>{{ item.title }}</span>
+            <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+        </a>
+{#        <!--class="{{ item.class }}"-->#}
+        <ul class="treeview-menu">
+            {% for foo in item.children %}
+                <li class="{{ foo.class }}"><a href="{{ foo.url }}">{{ foo.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </li>
+{% endfor %}
+

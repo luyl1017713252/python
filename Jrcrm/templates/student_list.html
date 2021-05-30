@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block style %}
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
+{% endblock %}
+{% block content %}
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <form class="form_control">
+            <section class="content-header">
+                <h1>
+                    学生列表
+                    <small>Optional description</small>
+                </h1>
+            </section>
+        </form>
+        {#            <form method="post" class="form_control">#}
+        <form method="post">
+            {% csrf_token %}
+            <select name="action" class="form-control" style="display: inline-block;width: 150px;margin-left: 12px">
+                <option value="">---添加至班级---</option>
+                {% for clas in class_list %}
+                    <option value="{{ clas.pk }}">{{ clas.get_course_display }}</option>
+                {% endfor %}
+            </select>
+            <button class="btn-success btn" style="vertical-align: 0">GO</button>
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="box">
+                            <div class="box-header">
+                                {% if request.path != "/mycustomers/" %}
+                                    <h3 class="box-title"><a href="/student/add/" class="btn btn-dropbox">添加学生</a></h3>
+                                {% endif %}
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body box2">
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th><input type="checkbox" id="box_tion">全选</th>
+                                        <th>编号</th>
+                                        <th>姓名</th>
+                                        <th>联系人</th>
+                                        <th>编辑</th>
+                                        <th>删除</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for content in student_list %}
+                                        <tr>
+                                            <td><input class="checkbox_boy" type="checkbox" name="pk_list"
+                                                       value={{ content.id }}></td>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{ content.customer }}</td>
+                                            <td>{{ content.emergency_contract }}</td>
+                                            <td>
+                                                <a href="/student/edit/{{ content.pk }}{{ next }}"><i
+                                                        class="fa fa-edit"></i></a>
+                                            </td>
+                                            <td>
+                                                <a href="/student/dele/{{ content.pk }}{{ next }}"><i
+                                                        class="fa fa-remove"></i></a>
+                                            </td>
+
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+                                <nav aria-label="Page right">
+                                    <ul class="pagination">
+                                        {{ pagination.page_html |safe }}
+                                    </ul>
+                                </nav>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </section>
+            <!-- /.content -->
+        </form>
+    </div>
+{% endblock %}
+
+
+{% block js %}
+    <script>
+
+        $('#box_tion').click(function () {
+            var status = $('#box_tion').prop("checked");
+            if (status == true) {
+                $('.checkbox_boy').prop("checked", true)
+            } else {
+                $('.checkbox_boy').prop("checked", false)
+            }
+        })
+
+
+    </script>
+
+{% endblock %}

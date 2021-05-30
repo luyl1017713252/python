@@ -1,0 +1,2 @@
+middlewares.py 文件是中间件的文件需要手动到settings.py配置文件去配置
+rbac.py 里的is_permission函数是用于，获取当前用户的权限，调用时需要添加登录后匹配成功的user对象以及request

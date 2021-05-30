@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>更改</title>
+{% endblock %}
+
+{% block h3 %}
+    <h3>更改书籍</h3>
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-6 col-md-offset-3">
+            <form action="" method="post">
+                {% csrf_token %}
+                {% for book in book_up_list %}
+                <div class="form-group">
+                    <label for="title">书籍名称</label>
+                    <span id="book_name" class="iconfont">&#xe606;</span>
+                    <input type="text" class="form-control" id="title" placeholder="title" name="title" value="{{ book.title }}">
+                </div>
+                <div class="form-group">
+                    <label for="price">书籍价格</label>
+                    <span id="book_price" class="iconfont">&#xe606;</span>
+                    <input type="text" class="form-control" id="price" placeholder="price" name="price" value="{{ book.price }}">
+                </div>
+                <div class="form-group">
+                    <label for="pub_date">出版日期</label>
+                    <span id="book_date" class="iconfont">&#xe606;</span>
+                    <input type="date" class="form-control" id="pub_date" placeholder="pub_date" name="pub_date" value="{{ book.pub_date | date:'Y-m-d' }}">
+                </div>
+                <div class="form-group">
+                    <label for="publish">出版社</label>
+                    <span id="book_publish" class="iconfont">&#xe606;</span>
+                    <select name="publish" id="publish" class="form-control">
+                        {% for publish in publish_list %}
+                            {% if book.publish == publish %}
+                            <option value="{{ publish.pk }}" selected>{{ publish.name }}</option>
+                            {% else %}
+                            <option value="{{ publish.pk }}">{{ publish.name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="authors">作者</label>
+                    <span id="book_authors" class="iconfont">&#xe606;</span>
+                    <select name="authors" id="authors" class="form-control" multiple>
+                        {% for author in author_list %}
+                            {% if author in book.authors.all %}
+                            <option value="{{ author.pk }}" selected>{{ author.name }}</option>
+                            {% else %}
+                            <option value="{{ author.pk }}">{{ author.name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-success pull-right">提交</button>
+            {% endfor %}
+            </form>
+
+        </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(function () {
+            $('span').css('display', 'none')
+            $('#title').blur(function () {
+                var text = this.value
+                re_book_name = /^[\u4E00-\u9FA5A-Za-z\\s]+(·[\u4E00-\u9FA5A-Za-z]+)*$/
+                if (text == '') {
+                    $('#book_name').html('&#xe64b;不能为空').css('color', 'red')
+                } else if (text.search(re_book_name) !== -1) {
+                    $('#book_name').html('&#xe606;').css('color', 'blue')
+                }else {
+                    $('#book_name').html('&#xe64b;格式错误').css('color', 'red')
+                }
+                $('#book_name').css('display', 'inline-block')
+            })
+            $('#price').blur(function () {
+                var text = this.value
+                re_book_price = /((^[1-9]\d*)|^0)(\.\d{0,2}){0,1}$/
+                if (text == '') {
+                    $('#book_price').html('&#xe64b;不能为空').css('color', 'red')
+                } else if (text.search(re_book_price) !== -1) {
+                    $('#book_price').html('&#xe606;').css('color', 'blue')
+                }else {
+                    $('#book_price').html('&#xe64b;格式错误').css('color', 'red')
+                }
+                $('#book_price').css('display', 'inline-block')
+            })
+            $('#pub_date').blur(function () {
+                var text = this.value
+                re_book_date = /^[1-9]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/
+                if (text == '') {
+                    $('#book_date').html('&#xe64b;不能为空').css('color', 'red')
+                }else if(text.search(re_book_date) !== -1){
+                    $('#book_date').html('&#xe606;').css('color', 'blue')
+                }else{
+                    $('#book_date').html('&#xe64b;格式错误').css('color', 'red')
+                }
+                $('#book_date').css('display', 'inline-block')
+            })
+            $('#publish').blur(function () {
+                var text = this.value
+                if (text == '') {
+                    $('#book_publish').html('&#xe64b;不能为空').css('color', 'red')
+                }else{
+                    $('#book_publish').html('&#xe606;').css('color', 'blue')
+                }
+                $('#book_publish').css('display', 'inline-block')
+            })
+            $('#authors').blur(function () {
+                var text = this.value
+                if (text == '') {
+                    $('#book_authors').html('&#xe64b;至少要有一个作者').css('color', 'red')
+                }else{
+                    $('#book_authors').html('&#xe606;').css('color', 'blue')
+                }
+                $('#book_authors').css('display', 'inline-block')
+            })
+        })
+    </script>
+{% endblock %}

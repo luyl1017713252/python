@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <script src="/static/highcharts/highcharts.js"></script>
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <form class="form_control">
+            <section class="content-header">
+                <h1>
+                    <small>欢迎使用JRCRM {{ request.session.username }}</small>
+                </h1>
+            </section>
+        </form>
+
+        <form method="post">
+            {% csrf_token %}
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div id="container" style="min-width:400px;height:400px"></div>
+
+                        <!-- /.box -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </section>
+            <!-- /.content -->
+        </form>
+
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        var chart = Highcharts.chart('container', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: '人数统计'
+            },
+            subtitle: {
+                text: '数据截止 {{ today|date:'Y-m-d' }}，来源: <a href="/">Jrcrm</a>'
+            },
+            xAxis: {
+                type: 'category',
+                labels: {
+                    rotation: -45  // 设置轴标签旋转角度
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: '人数(个)'
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            tooltip: {
+                pointFormat: '人数: <b>{point.y} 个</b>'
+            },
+            series: [{
+                name: '总人数',
+                data: {{ ret|safe }},
+                dataLabels: {
+                    enabled: true,
+                    rotation: -90,
+                    color: '#FFFFFF',
+                    align: 'right',
+                    format: '{point.y}', // :.1f 为保留 1 位小数
+                    y: 10
+                }
+            }]
+        });
+    </script>
+{% endblock %}
