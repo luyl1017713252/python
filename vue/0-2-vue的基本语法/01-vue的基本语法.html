@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <!--模板语法-->
+    <h2>{{ msg }}</h2>
+    <h2>{{ hahaha }}</h2>
+    <h2>{{ 1+1 }}</h2>
+    <h2>{{ {'name':'杨凡', 'age': 18} }}</h2>
+    <h2>{{ 1>2?'true':'false' }}</h2>
+    <h2>{{ person.name }}</h2>
+    <h2>{{ m2.split('').reverse().join('') }}</h2>
+
+</div>
+
+<script src="../vue.js"></script>
+
+<script>
+    //1. 实例化对象
+    new Vue({
+        el:'#app', //绑定需要操作的元素
+        data:{
+            msg:'曾洲',
+            person:{
+                name:'杨凡'
+            },
+            m2: 'hello Vue',
+            text: '<h2>下班了</h2>',
+        }
+
+    })
+
+</script>
+
+</body>
+</html>

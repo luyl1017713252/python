@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    let person = {
+        name: '杨凡',
+        age: 20,
+        fav: function () {
+            console.log(this)
+            console.log(this.name)
+        }
+    }
+    person.fav()
+
+
+    let person2 = {
+        name: '杨凡',
+        age: 20,
+        fav: ()=> {
+            //当使用箭头函数this的指向父类对象
+            console.log(this)
+            console.log(this.name)
+        }
+    }
+    // person2.fav()
+
+    // 对象的单体模式
+    let person3 = {
+        name: '杨凡',
+        fav(){
+            console.log(this)
+        }
+    }
+    person3.fav()
+
+
+</script>
+
+</body>
+</html>
