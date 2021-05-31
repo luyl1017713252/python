@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+
+{% block main %}
+    <div class="row">
+        <div class="col-md-12" style="background-color: #FCF8FF">
+            <div class="row form-group">
+                <!--大标题-->
+                <h2 style="color: black">我的爱好</h2>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-12">
+                    <div class="col-md-5 col-md-offset-1">
+                        <!--img标签里的src放的是static里hobby的图片按自己要求更改-->
+                        <img src="/static/img/hobby/爱好.jpg" class="img-responsive " alt="头像">
+                    </div>
+                    <div class="blog-list--desc mt-4">
+                        <!--这里写文案-->
+                        <h3>内容标题</h3>
+                        <p>文案</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .col-md-8 -->
+    </div>
+
+{% endblock %}

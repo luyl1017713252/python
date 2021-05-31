@@ -1,0 +1,63 @@
+{% extends 'index.html' %}
+
+{% block head %}
+    <title>大学</title>
+
+    <link href="/static/css/school.css" rel="stylesheet" type="text/css">
+{% endblock %}
+{% block main_ %}
+
+
+    <main class="bs-docs-masthead" style="height: 1000px" id="content" tabindex="-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2" style="background-color: #FCF8FF">
+                    <div class="row form-group">
+                        <h3 style="color: black">我的学校</h3>
+                    </div>
+                    <hr>
+                    <div class="row form-group">
+                        <div class="col-md-3">
+
+                        </div>
+                        <div class="col-md-3 pull-left">
+                            <ul>
+                                <li>校名：</li>
+                                <li>地址：</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3">
+                            <ul>
+                                <!--大学名称-->
+                                <li>湖南大学</li>
+                                <!--大学地址-->
+                                <li>湖南长沙</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3">
+
+                        </div>
+
+                    </div>
+
+                    <div class="row form-group quick_entrance">
+                        <a href="#" class="tganime-image-hover" target="_blank" title="">
+                            <!-- 图片在/static/images/school/  修改src改成想要放的图片-->
+                            <img src="/static/images/school/3.jpg" alt="">
+                        </a>
+                        <a href="#" class="tganime-image-hover" target="_blank" title="">
+
+                            <img src="/static/images/school/mao.jpg" alt="">
+                        </a>
+                        <a href="#" class="tganime-image-hover" target="_blank" >
+
+                            <img src="/static/images/school/6.jpg" alt="">
+                        </a>
+
+                    </div>
+                </div>
+
+
+            </div>
+    </main>
+{% endblock %}

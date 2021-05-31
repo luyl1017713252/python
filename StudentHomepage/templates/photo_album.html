@@ -1,0 +1,84 @@
+{% extends 'index.html' %}
+
+{% block head %}
+    <title>相册</title>
+    <meta charset="utf-8">
+    {#<meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui, user-scalable=no">#}
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/screen.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/ma5gallery.css" rel="stylesheet" type="text/css">
+
+
+{% endblock %}
+{% block main_ %}
+    <section class="site-header container">
+        <h1>相册</h1>
+        <div class="ma5-gallery">
+            <figure class="gallery-item ma5-lightbox">
+                <!--               照片的路径在/static/images/下，可以存放直接的照片，修改src替换-->
+                <img src="/static/images/DSC_1390-thumbnail.jpg" alt="">
+                <!--照面的名字-->
+                <figcaption>Kurka wodna</figcaption>
+            </figure>
+            <figure class="gallery-item ma5-lightbox">
+                <img src="/static/images/DSC_1002-thumbnail.jpg" alt="">
+                <figcaption>Łyska</figcaption>
+            </figure>
+            <figure class="gallery-item ma5-lightbox">
+                <img src="/static/images/DSC_1103-thumbnail.jpg" alt="">
+                <figcaption>Kawka</figcaption>
+            </figure>
+            <figure class="gallery-item ma5-lightbox">
+                <img src="/static/images/DSC_0663-thumbnail.jpg" alt="">
+                <figcaption>Kaczka</figcaption>
+            </figure>
+            <figure class="gallery-item ma5-lightbox">
+                <img src="/static/images/DSC_1068-thumbnail.jpg" alt="">
+                <figcaption>Wrona</figcaption>
+            </figure>
+            <figure class="gallery-item ma5-lightbox">
+                <img src="/static/images/DSC_0916-thumbnail.jpg" alt="">
+                <figcaption>Wróbel</figcaption>
+            </figure>
+            <figure class="gallery-item ma5-lightbox">
+                <img src="/static/images/DSC_1155-thumbnail.jpg" alt="">
+                <figcaption>Dzięcioł</figcaption>
+            </figure>
+            <figure class="gallery-item ma5-lightbox">
+                <img src="/static/images/DSC_0922-thumbnail.jpg" alt="">
+                <figcaption>Rudzik</figcaption>
+            </figure>
+            <figure class="gallery-item ma5-lightbox">
+                <img src="/static/images/DSC_1352-thumbnail.jpg" alt="">
+                <figcaption>Kos</figcaption>
+            </figure>
+            <figure class="gallery-item ma5-lightbox">
+                <img src="/static/images/DSC_1769-thumbnail.jpg" alt="">
+                <figcaption>Skowronek</figcaption>
+            </figure>
+            <figure class="gallery-item ma5-lightbox">
+                <img src="/static/images/DSC_0791-thumbnail.jpg" alt="">
+                <figcaption>Pliszka</figcaption>
+            </figure>
+            <figure class="gallery-item ma5-lightbox">
+                <img src="/static/images/DSC_1641-thumbnail.jpg" alt="">
+                <figcaption>Mewa</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    {#<div style="text-align:center;clear:both;">#}
+    {#<script src="/gg_bd_ad_720x90.js" type="text/javascript"></script>#}
+    {#<script src="/follow.js" type="text/javascript"></script>#}
+    {#</div>#}
+{% endblock %}
+{% block footer %}
+
+{% endblock %}
+{% block js %}
+    <script src="/static/js/ma5gallery.js"></script>
+    <script src="/static/js/functions.js"></script>
+    <!--[if lt IE 9]>
+    <script src="/static/js/html5.js"></script>
+    <![endif]-->
+{% endblock %}

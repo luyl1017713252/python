@@ -1,0 +1,39 @@
+
+li {
+    list-style: none
+}
+
+img {
+    border: 0;
+    vertical-align: middle
+}
+
+.form-group {
+    color: black;
+}
+
+
+
+.quick_entrance {
+    display: inline-block;
+    overflow: hidden;
+    margin: auto auto 20px;
+    letter-spacing: -0.35em;
+}
+.quick_entrance img{
+    height: 100px;
+    width: 180px;
+    cursor: pointer;
+    transition: all 0.4s;
+}
+.quick_entrance img:hover{
+    transform: scale(1.1);
+}
+
+
+.quick_entrance .tganime-image-hover{
+    display: inline-block;
+
+    margin-right: 12px;
+    overflow: hidden;
+}

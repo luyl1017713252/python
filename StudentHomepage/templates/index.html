@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>个人首页</title>
+
+    <!-- Bootstrap core CSS -->
+{% block head2 %}
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Documentation extras -->
+    <link href="/static/assets/css/docs.min.css" rel="stylesheet">
+    <link rel="icon" href="/static/ico/icon.ico">
+ {% endblock %}
+{% block head %}
+
+    {% endblock %}
+
+</head>
+<body class="bs-docs-home">
+
+<!--头部导航栏-->
+<header class="navbar navbar-static-top bs-docs-nav" id="top">
+    <div class="container" style="margin:0 auto">
+        <div class="navbar-header">
+            <a href="/" class="navbar-brand">首页</a>
+        </div>
+        <nav id="bs-navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="/home/">家乡</a>
+                </li>
+                <li>
+                    <a href="/school/">大学</a>
+                </li>
+                <li>
+                    <a href="/hobby/">爱好</a>
+                </li>
+                <li>
+                    <a href="/photo_album/">相册</a>
+                </li>
+                <li>
+                    <a href="/admirer/">偶像</a>
+                </li>
+                <li>
+                    <a href="/reading_matter/">读书</a>
+                </li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/logout/">注销</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<!--主页面-->
+{% block main_ %}
+
+
+<main class="bs-docs-masthead" style="height: auto" id="content" tabindex="-1">
+    <div class="container">
+        {% block main %}
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2" style="background-color: #FCF8FF">
+                <div class="row form-group">
+                    <h3 style="color: black">个人简介</h3>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-5 col-md-offset-1">
+                        <!--img标签里的src放的是static里的图片按可以放自己的照片-->
+                        <img src="/static/img/微信图片_20200311164903.jpg" class="img-responsive " alt="头像">
+                    </div>
+                    <div class="col-md-5 pull-left">
+                        <table class="table table-bordered" style="margin-top: 40px">
+                            <tr>
+                                <td class="info">名字：</td>
+                                <td class="info">张三</td>
+                            </tr>
+                            <tr>
+                                <td class="info">性别：</td>
+                                <td class="info">男</td>
+                            </tr>
+                            <tr>
+                                <td class="info">电话：</td>
+                                <td class="info">10086</td>
+                            </tr>
+                            <tr>
+                                <td class="info">邮箱：</td>
+                                <td class="info">1000@qq.com</td>
+                            </tr>
+                            <tr>
+                                <td class="info">QQ：</td>
+                                <td class="info">1000</td>
+                            </tr>
+
+
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+            <!-- .col-md-8 -->
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8 col-md-offset-2" style="background-color: #FCF8FF; margin-top: 30px">
+                <div class="row form-group">
+                    <h3 style="color: black">个人作业</h3>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        <table class="table table-bordered" style="margin-top: 40px">
+                            <!--a标签里的href放的可以放html自行添加-->
+                            <td><a href="#">作业1</a></td>
+                            <td><a href="#">作业2</a></td>
+                            <td><a href="#">作业3</a></td>
+                            <td><a href="#">作业4</a></td>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        {% endblock %}
+    </div>
+
+</main>
+{% endblock %}
+
+<!--尾部-->
+{% block footer %}
+<footer class="bs-docs-footer">
+</footer>
+{% endblock %}
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="/static/bootstrap/js/jquery.js"></script>
+
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+{% block js %}
+
+{% endblock %}
+</body>
+</html>
+
+
+
