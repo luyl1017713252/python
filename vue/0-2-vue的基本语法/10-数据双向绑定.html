@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="msg">
+    {{msg}}
+
+</div>
+
+<script src="../vue.js"></script>
+
+<script>
+    new Vue({
+        el: '#app',
+        data(){
+            return{
+                msg: '杨凡'
+            }
+        }
+
+    })
+
+</script>
+
+</body>
+</html>

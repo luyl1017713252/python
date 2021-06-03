@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="music">
+    <p>当前歌曲: {{musicData[num].name}}</p>
+    <p>歌手: {{musicData[num].author}}</p>
+    <audio @ended="handleNext" height="100" width="300" controls="controls" autoplay :src="musicData[num].songSrc"></audio>
+    <ul>
+        <li @click="songClick(index)" v-for="(music, index) in musicData" :key="music.id">
+            <h2>歌名：{{music.name}}</h2>
+            <h3>歌手：{{music.author}}</h3>
+        </li>
+    </ul>
+</div>
+<script src="../vue.js"></script>
+
+<script>
+    var musicData=[
+        {id:1,name:'于荣光-少林英雄',author:'于荣光', songSrc:'../static/于荣光-少林英雄.mp3'},
+        {id:2,name:'Joel_Adams-Please_Dont_Go',author:'Joel Adams', songSrc:'../static/Joel_Adams-Please_Dont_Go.mp3'},
+        {id:3,name:'MKJ-Time',author:'MKJ', songSrc:'../static/MKJ-Time.mp3'},
+        {id:4,name:'Russ-Psycho-(Pt. 2)',author:'Russ', songSrc:'../static/Russ-Psycho-(Pt. 2).mp3'},
+    ]
+    new Vue({
+        el:'#music',
+        data(){
+            return{
+                musicData: [],
+                num: 0,
+            }
+        },
+        methods:{
+            songClick(index){
+                this.num = index
+            },
+            handleNext(){
+                this.num++;
+                if (this.num==musicData.length){
+                    this.num = 0
+                }
+            }
+        },
+        created(){
+           this.musicData = musicData
+        }
+    })
+</script>
+
+</body>
+</html>

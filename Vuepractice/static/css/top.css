@@ -1,0 +1,21 @@
+.top{
+    height: 40px;
+    width: 600px;
+    background-color: beige;
+    margin: auto;
+}
+.top_ul{
+    list-style-type: none;
+}
+.top_ul li{
+    width: auto;
+    height: 40px;
+    float: left;
+}
+span{
+    line-height: 40px;
+    padding: 10px 30px;
+}
+.child_div{
+    display: none;
+}

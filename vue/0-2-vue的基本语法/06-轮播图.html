@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+    <img :src="images[currentIndex].imgSrc" alt="">
+    <br>
+    <button @click="prevHandler">上一张</button>
+    <button @click="nextHandler">下一张</button>
+</div>
+
+<script src="../vue.js"></script>
+
+<script>
+    new Vue({
+        el: '#app',
+        data(){
+            return{
+                images:[
+                    {id: 1, imgSrc: '../imgs/明星1.jpg'},
+                    {id: 2, imgSrc: '../imgs/明星2.jpg'},
+                    {id: 3, imgSrc: '../imgs/明星3.jpg'}
+                ],
+                currentIndex: 0
+            }
+        },
+        methods:{
+            nextHandler(){
+                this.currentIndex++;
+                if (this.currentIndex == this.images.length){
+                    this.currentIndex = 0
+                }
+            },
+            prevHandler(){
+                this.currentIndex--;
+                if (this.currentIndex == -1){
+                    this.currentIndex = this.images.length - 1
+                }
+            }
+
+        },
+        create:{
+
+        }
+
+    })
+
+</script>
+</body>
+</html>

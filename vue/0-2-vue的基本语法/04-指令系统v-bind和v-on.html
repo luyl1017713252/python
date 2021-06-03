@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            height: 200px;
+            width: 200px;
+        }
+        .action{
+            background-color: green;
+        }
+
+    </style>
+</head>
+<body>
+<div id="app">
+    <img v-bind:src="Imgs" v-bind:alt="alt">
+    <div class="box" @:click="boxDiv" :style="styles"></div>
+</div>
+
+<script src="../vue.js"></script>
+
+<script>
+    new Vue({
+        el: '#app',
+        data(){
+            return{
+                styles: 'background-color: red',
+                Imgs: 'https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3135459185,1023545975&fm=26&gp=0.jpg',
+                alt: '彭于晏'
+            }
+        },
+        methods:{
+            boxDiv(){
+                this.styles = 'background-color: green'
+            }
+        }
+
+    })
+
+
+</script>
+
+</body>
+</html>

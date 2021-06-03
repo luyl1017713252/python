@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box {
+            background-color: red;
+            width: 200px;
+            height: 200px;
+
+        }
+        .box2 {
+            background-color: yellow;
+            width: 200px;
+            height: 200px;
+
+        }
+    </style>
+</head>
+<body>
+<div id="content">
+    {{ add(2, 3) }}
+    <button v-on:click="handlerClick">显示/隐藏</button>
+    <div class="box" v-show="isShow"></div>
+    <div class="box2" v-if="isShow"></div>
+</div>
+
+<script src="../vue.js"></script>
+
+<script>
+    new Vue({
+        el: '#content',
+        data:{
+
+            num :1,
+            isShow:true
+
+        },
+        methods:{
+            add(x, y) {
+                this.num = 20
+                console.log(this.num)
+                return x + y
+            },
+            handlerClick(){
+                this.isShow = !this.isShow
+            }
+        }
+
+    })
+
+</script>
+</body>
+</html>

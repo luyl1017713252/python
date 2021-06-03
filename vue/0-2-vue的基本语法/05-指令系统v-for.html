@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <ul v-if="data.status === 'ok'">
+        <li v-for="(item, index) in data.users" :key="item.id">
+            {{ index }} ---> {{ item.id }} ---> {{ item.name }} ---> {{ item.age }}
+
+        </li>
+    </ul>
+
+</div>
+
+<script src="../vue.js"></script>
+
+<script>
+    new Vue({
+        el: '#app',
+        data(){
+            return{
+               data:{
+                   status: 'ok',
+                   users:[
+                       {id: 1, name: '杨凡', age: 18},
+                       {id: 2, name: '曾洲', age: 19},
+                       {id: 3, name: '叶鹏辉', age: 20},
+                   ]
+               },
+            }
+
+        }
+
+    })
+
+
+</script>
+
+</body>
+</html>

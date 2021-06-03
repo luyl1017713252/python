@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <p>{{msg}}</p>
+    <p>{{age}}</p>
+    <button @click="btnClick">修改</button>
+</div>
+
+<script src="../vue.js"></script>
+
+<script>
+    new Vue({
+        el: '#app',
+        data(){
+            return{
+                msg: '杨凡',
+                age: 18,
+            }
+        },
+        methods:{
+            btnClick(){
+                this.msg = '曾洲'
+                this.age = '30'
+            }
+        },
+        watch:{
+            'msg': function (value) {
+                console.log(this)
+                this.msg = 'wy';
+            },
+            'age':function (value) {
+                this.age = 28
+            }
+        }
+
+    })
+
+
+</script>
+</body>
+</html>

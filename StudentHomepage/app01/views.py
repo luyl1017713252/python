@@ -91,7 +91,6 @@ class Admirer(View):
     def get(self, request):
         return render(request, 'admirer.html')
 
-
 class ReadingMatter(View):
     def get(self, request):
         return render(request, 'readingmatter.html')
