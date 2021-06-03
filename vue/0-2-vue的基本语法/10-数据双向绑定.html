@@ -8,6 +8,15 @@
 <div id="app">
     <input type="text" v-model="msg">
     {{msg}}
+    <br>
+    <input type="text" v-model.lazy="msg">
+    {{msg}}
+    <br>
+    <input type="number" v-model.number="age">
+    <br>
+    <input type="text" v-model.trim="msg">
+    {{msg}}
+    {{age}}
 
 </div>
 
@@ -18,7 +27,8 @@
         el: '#app',
         data(){
             return{
-                msg: '杨凡'
+                msg: '杨凡',
+                age: 18
             }
         }
 

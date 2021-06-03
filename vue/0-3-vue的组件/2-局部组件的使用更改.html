@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <app/>
+    <Vheader/>
+</div>
+<script src="../vue.js"></script>
+<script>
+    // 如果实例化vue对象中 既有el 又template，
+    // 如果template有值就会替换掉el绑定内容，因为template优先级高于el
+    // 使用组件的三步骤:1、声子  2、绑子  3、用子
+    // 声子 组件名一定是首字母大写，为了跟html标记区分
+    // 声明了一个全局的组件
+    Vue.component('VBtn',{
+        data(){
+            return{
+
+            }
+        },
+        template:`<button><slot></slot></button>`
+    })
+    let App = {
+        data() {
+            return {
+                text: '曾洲'
+            }
+        },
+        template: `
+            <div>
+                <h2>我是{{ text }}</h2>
+            </div>
+        `
+    }
+
+    let Vheader={
+        data(){
+            return{
+
+            }
+        },
+        template: `
+            <div>
+            <h2>wy</h2>
+            <h2>wlf</h2>
+            <h2>xqg</h2>
+            <VBtn>提交</VBtn>
+            <VBtn>删除</VBtn>
+            </div>
+        `
+    }
+
+
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                msg: '杨凡'
+            }
+        },
+        template:`
+            <div id="app">
+                    <app/>
+                    <Vheader/>
+            </div>
+        `,
+        components: {
+            // 绑子
+            // 'App':App,
+            App,
+            Vheader,
+        }
+    })
+</script>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <App/>
+
+</div>
+<script src="../vue.js"></script>
+<script>
+    Vue.component('VBtn',{
+        data(){
+            return{
+
+            }
+        },
+        props: ['btnName'],
+        template:`
+            <button>{{btnName}}</button>
+        `
+    })
+    let Vheader = {
+        data() {
+            return {}
+        },
+        props: ['post', 'msg','btnName'],
+        template: `
+            <div class="child">
+                <h2>杨凡</h2>
+                 <h3>{{post.title}}</h3>
+                 <h3>{{msg}}</h3>
+                 <h3>{{btnName}}</h3>
+                 <VBtn :btnName="btnName"></VBtn>
+            </div>
+        `
+    }
+    // 练习，创建一个全局组件 btn 显示的内容根据父组件传递的值
+    let App = {
+        data() {
+            return {
+                text: '我是父组件的数据',
+                msg: '我是父组件的msg',
+                btnName:'提交',
+                post: {
+                    id: 1,
+                    title: '我是父组件的post title'
+                }
+            }
+        },
+        template: `
+            <div class="father">
+                {{text}}
+                <Vheader v-bind:post="post" :msg="msg" :btnName="btnName"></Vheader>
+            </div>
+        `,
+        components: {
+            Vheader,
+        }
+    }
+    new Vue({
+        el: '#app',
+        data() {
+            return {}
+        },
+        components: {
+            App,
+        }
+    })
+
+</script>
+</body>
+</html>
