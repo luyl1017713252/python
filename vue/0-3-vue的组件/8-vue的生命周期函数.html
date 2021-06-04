@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <App/>
+</div>
+<script src="../vue.js"></script>
+
+<script>
+    let Test = {
+        data() {
+            return {
+                msg: '杨凡'
+            }
+        },
+        template: `
+            <div id="test">
+                <div id="box">{{msg}}</div>
+                <button @click="boxedit">修改</button>
+            </div>
+        `,
+        methods: {
+            boxedit(){
+                this.msg = '曾洲'
+            }
+        },
+        created() {
+            // 通常发送ajax请求获取数据， 实现数据驱动视图
+            console.log('组件创建之后', this.msg)
+        },
+        beforeCreate() {
+            console.log('组件创建之前', this.msg)
+        },
+        beforeMount() {
+            // 组件绑定之前
+            console.log('组件绑定之前', document.getElementById('app2'))
+        },
+        mounted() {
+            console.log('组件绑定之后', document.getElementById('app2'))
+        },
+        beforeUpdate() {
+            console.log('组件修改之前', document.getElementById('box').innerHTML)
+        },
+        updated() {
+            console.log('组件修改之后', document.getElementById('box').innerHTML)
+        },
+        beforeDestroy(){
+            console.log('组件销毁之前')
+        },
+        destroyed(){
+            console.log('组件销毁之后')
+        },
+        deactivated(){
+            console.log('该钩子在渲染期间不会被调用')
+        }
+
+    }
+    let App = {
+        data() {
+            return {
+                isShow: true
+            }
+        },
+        template: `
+            <div id="app2">
+                <Test v-if="isShow"/>
+                <button @click="clickHandler">控制test生死</button>
+            </div>
+        `,
+        methods: {
+            clickHandler(){
+                this.isShow = !this.isShow
+            }
+        },
+        components: {
+            Test,
+        }
+
+    }
+    new Vue({
+        el: '#app',
+        data() {
+            return {}
+        },
+        components: {
+            App,
+        }
+
+    })
+
+</script>
+</body>
+</html>

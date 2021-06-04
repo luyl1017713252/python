@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <App/>
+</div>
+
+<script src="../vue.js"></script>
+
+<script>
+    let bus = new Vue()
+    Vue.component('Test2', {
+        data() {
+            return {
+                msg: '我是Test2的数据',
+                text: ''
+            }
+        },
+        template:`
+            <div></div>
+        `,
+        created(){
+            bus.$on('testData', function (val) {
+                console.log(val)
+            })
+        }
+    })
+    Vue.component('Test1', {
+        data(){
+            return{
+                msg: '我是Test1的数据'
+            }
+        },
+        template:`
+            <button @click="clickHandler">传递</button>
+        `,
+        methods:{
+            clickHandler(){
+                bus.$emit('testData', this.msg)
+            }
+
+        }
+
+    })
+    let Vheader = {
+        data(){
+            return{
+
+            }
+        },
+        template:`
+            <div class="hander">
+                我是Vheader
+                <Test1/>
+                <Test2/>
+            </div>
+        `,
+    }
+    let App={
+        data(){
+            return{
+
+            }
+        },
+        template:`
+            <div class="app">
+                我是App
+                <Vheader/>
+            </div>
+        `,
+        components:{
+            Vheader,
+        }
+    }
+    new Vue({
+        el: '#app',
+        data(){
+            return{
+
+            }
+        },
+        components: {
+            App,
+        }
+
+    })
+
+</script>
+</body>
+</html>

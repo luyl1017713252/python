@@ -110,3 +110,12 @@ v-on 可以监听 js中的所有事件,缩写 @
             {{index}}--> {{item.id}} ---> {{item.name}}--->{{item.age}}
         </li>
     </ul>
+
+### 7、双向数据绑定
+input textarea select option ---> v-model.lazy .number .trim
+
+### 8、组件
+####(1)局部组件
+
+
+####(2)全局组件
